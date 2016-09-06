@@ -1,0 +1,26 @@
+{
+  "name": "testing-lib",
+  "version": "0.0.1",
+  "description": "A self testing lib",
+  "main": "Tester.js",
+  "dependencies": {
+    "colors": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node TesterSpec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AFrancani/testing-lib.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "author": "AFrancani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AFrancani/testing-lib/issues"
+  },
+  "homepage": "https://github.com/AFrancani/testing-lib#readme"
+}
