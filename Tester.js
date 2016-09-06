@@ -5,7 +5,11 @@ module.exports = function(logger) {
 	var prefixe = '';
 
 	function beforeEach(functionToRun) {
-		beforeEachFunction = functionToRun;
+		var previousBeforeEach = beforeEachFunction;
+		beforeEachFunction = function() {
+			previousBeforeEach();
+			functionToRun();
+		};
 	}
 
 	function addPrefixeSize(value) {
@@ -33,12 +37,14 @@ module.exports = function(logger) {
 	}
 
 	function describe(name, functionContainingTests) {
+		var previousBeforeEach = beforeEachFunction;
 		log(' ');
 		log(name.bold);
 		addPrefixeSize(2);
 		functionContainingTests();
 		addPrefixeSize(-2);
 		log(' ');
+		beforeEachFunction = previousBeforeEach;
 	}
 
 	return {
