@@ -231,3 +231,25 @@ testThat('describe should reset the beforeEach function after it is done', funct
 
 	assertThat(steps, equals('aa'));
 });
+
+testThat('describe should call the previous beforeEach function before its own', function() {
+	var steps = '';
+
+	tester.beforeEach(function() {
+		steps += 'a';
+	});
+
+	tester.testThat('', function() {});
+
+	tester.describe('b', function() {
+		tester.beforeEach(function() {
+			steps += 'b';
+		});
+
+		tester.testThat('', function() {});
+	});
+
+	tester.testThat('', function() {});
+
+	assertThat(steps, equals('aaba'));
+});
