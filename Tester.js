@@ -5,7 +5,11 @@ module.exports = function(logger) {
 	var prefixe = '';
 
 	function beforeEach(functionToRun) {
-		beforeEachFunction = functionToRun;
+		var previousBeforeEach = beforeEachFunction;
+		beforeEachFunction = function() {
+			previousBeforeEach();
+			functionToRun();
+		};
 	}
 
 	function addPrefixeSize(value) {
