@@ -24,15 +24,24 @@ module.exports = function(logger) {
 		logger.log(prefixe + message);
 	}
 
-	function testThat(name, functionToTest) {
+	function testThat(name, functionContainingTest) {
+		var testResult = runTest(name, functionContainingTest);
+
+		log(testResult.name + (testResult.passed ? ' passed!'.green : ' failed!'.red));
+		if(!testResult.passed) {
+			log('  ' + testResult.message);
+		}
+
+		return testResult.passed;
+	}
+
+	function runTest(name, functionContainingTest) {
+		beforeEachFunction();
 		try {
-			beforeEachFunction();
-			functionToTest();
-			log(name + ' passed!'.green);
-			return true;
+			functionContainingTest();
+			return { name: name, passed: true };
 		} catch (e) {
-			log(name + ' failed!'.red);
-			log('  ' + e.message);
+			return { name: name, passed: false, message: e.message };
 		}
 	}
 
