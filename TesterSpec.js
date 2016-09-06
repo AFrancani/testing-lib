@@ -211,3 +211,23 @@ testThat('describe should add some space for the logger', function() {
 
 	assertThat(logger.logged('  some test' + ' passed!'.green), isTrue);
 });
+
+testThat('describe should reset the beforeEach function after it is done', function() {
+	var steps = '';
+
+	tester.beforeEach(function() {
+		steps += 'a';
+	});
+
+	tester.testThat('', function() {});
+
+	tester.describe('b', function() {
+		tester.beforeEach(function() {
+			steps += 'b';
+		});
+	});
+
+	tester.testThat('', function() {});
+
+	assertThat(steps, equals('aa'));
+});
