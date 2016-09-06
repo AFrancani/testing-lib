@@ -33,12 +33,14 @@ module.exports = function(logger) {
 	}
 
 	function describe(name, functionContainingTests) {
+		var previousBeforeEach = beforeEachFunction;
 		log(' ');
 		log(name.bold);
 		addPrefixeSize(2);
 		functionContainingTests();
 		addPrefixeSize(-2);
 		log(' ');
+		beforeEachFunction = previousBeforeEach;
 	}
 
 	return {
