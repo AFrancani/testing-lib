@@ -1,5 +1,5 @@
 const Assertion = require('./Assertion.js'),
-	Tester = require('./Tester.js'),
+	Tester = require('./LoggingTester.js'),
 	FakeLogger =  require('./FakeLogger.js');
 
 const t = new Tester(console),
