@@ -1,6 +1,6 @@
 const Assertion = require('./Assertion.js'),
-	LoggingTester = require('./LoggingTester.js'),
-	FakeLogger =  require('./FakeLogger.js');
+	TesterCore = require('./TesterCore.js'),
+	LoggingTester = require('./LoggingTester.js');
 
 const t = new LoggingTester(console),
 	testThat = t.testThat,
@@ -17,7 +17,7 @@ const fail = Assertion.fail,
 
 testThat('testThat should pass if nothing fails', function() {
 	var testPassed = false,
-		tester = new LoggingTester(new FakeLogger());
+		tester = new TesterCore();
 
 	tester.testThat('something', function() {
 		testPassed = true;
@@ -31,7 +31,7 @@ testThat('testThat should pass if nothing fails', function() {
 testThat('beforeEach should be run before each test', function() {
 	var step = 1,
 		steps = '',
-		tester = new LoggingTester(new FakeLogger());
+		tester = new TesterCore();
 	tester.beforeEach(function() {
 		steps += step.toString();
 		step++;
@@ -48,11 +48,10 @@ testThat('beforeEach should be run before each test', function() {
 	}
 });
 
-var tester, logger;
+var tester;
 
 beforeEach(function() {
-	logger = new FakeLogger();
-	tester = new LoggingTester(logger);
+	tester = new TesterCore();
 });
 
 testThat('assertThat should pass if assertion is true', function() {
@@ -83,14 +82,14 @@ testThat('assertThat should fail test if assertion failed', function() {
 
 testThat('testThat should be true if nothing fails', function() {
 	assertThat(
-		tester.testThat('something', function() {}),
+		tester.testThat('something', function() {}).passed,
 		isTrue
 	);
 });
 
 testThat('testThat should be false if something fails', function() {
 	assertThat(
-		tester.testThat('something', fail),
+		tester.testThat('something', fail).passed,
 		isFalse
 	);
 });
