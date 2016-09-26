@@ -9,7 +9,7 @@ npm install
 ## Run the tests
 ```shell
 node AssertionSpec.js
-node TesterSpec.js
+node TesterCoreSpec.js
 node LoggingTesterSpec.js
 ```
 
