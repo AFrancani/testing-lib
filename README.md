@@ -9,6 +9,7 @@ npm install
 ## Run the tests
 ```shell
 node TesterSpec.js
+node LoggingTesterSpec.js
 ```
 
 ## Test your own features

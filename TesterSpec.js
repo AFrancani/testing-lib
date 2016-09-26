@@ -1,8 +1,8 @@
 const Assertion = require('./Assertion.js'),
-	Tester = require('./LoggingTester.js'),
+	LoggingTester = require('./LoggingTester.js'),
 	FakeLogger =  require('./FakeLogger.js');
 
-const t = new Tester(console),
+const t = new LoggingTester(console),
 	testThat = t.testThat,
 	beforeEach = t.beforeEach,
 	describe = t.describe;
@@ -43,7 +43,7 @@ testThat('isTrue should fail if value is false', function() {
 
 testThat('testThat should pass if nothing fails', function() {
 	var testPassed = false,
-		tester = new Tester(new FakeLogger());
+		tester = new LoggingTester(new FakeLogger());
 
 	tester.testThat('something', function() {
 		testPassed = true;
@@ -57,7 +57,7 @@ testThat('testThat should pass if nothing fails', function() {
 testThat('beforeEach should be run before each test', function() {
 	var step = 1,
 		steps = '',
-		tester = new Tester(new FakeLogger());
+		tester = new LoggingTester(new FakeLogger());
 	tester.beforeEach(function() {
 		steps += step.toString();
 		step++;
@@ -78,7 +78,7 @@ var tester, logger;
 
 beforeEach(function() {
 	logger = new FakeLogger();
-	tester = new Tester(logger);
+	tester = new LoggingTester(logger);
 });
 
 testThat('assertThat should pass if assertion is true', function() {
@@ -136,50 +136,6 @@ testThat('testThat should be false if something fails', function() {
 	);
 });
 
-var colors = require('colors');
-
-testThat('testThat should log when test pass', function() {
-	tester.testThat('some test', function() {});
-
-	assertThat(logger.logged('some test' + ' passed!'.green), isTrue);
-});
-
-testThat('testThat should log when test fails', function() {
-	tester.testThat('some test', fail);
-
-	assertThat(logger.logged('some test' + ' failed!'.red), isTrue);
-});
-
-testThat('testThat should log when fail assertion fails', function() {
-	tester.testThat('some test', fail);
-
-	assertThat(logger.logged('  Test failed!'), isTrue);
-});
-
-testThat('testThat should log when true assertion fails', function() {
-	tester.testThat('some test', function() {
-		isTrue(false);
-	});
-
-	assertThat(logger.logged('  Given value is not true!'), isTrue);
-});
-
-testThat('testThat should log when false assertion fails', function() {
-	tester.testThat('some test', function() {
-		isFalse(true);
-	});
-
-	assertThat(logger.logged('  Given value is not false!'), isTrue);
-});
-
-testThat('testThat should log when equals assertion fails', function() {
-	tester.testThat('some test', function() {
-		equals('some text')(42);
-	});
-
-	assertThat(logger.logged('  42 does not equal some text'), isTrue);
-});
-
 testThat('describe should run the tests it contains', function() {
 	var numberOfRunTests = 0;
 
@@ -194,22 +150,6 @@ testThat('describe should run the tests it contains', function() {
 	});
 
 	assertThat(numberOfRunTests, equals(2));
-});
-
-testThat('describe should log the feature it describes', function() {
-	tester.describe('a feature', function() {
-		tester.testThat('some test', function() {});
-	});
-
-	assertThat(logger.logged('a feature'.bold), isTrue);
-});
-
-testThat('describe should add some space for the logger', function() {
-	tester.describe('a feature', function() {
-		tester.testThat('some test', function() {});
-	});
-
-	assertThat(logger.logged('  some test' + ' passed!'.green), isTrue);
 });
 
 testThat('describe should reset the beforeEach function after it is done', function() {
