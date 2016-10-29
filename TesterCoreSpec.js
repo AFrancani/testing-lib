@@ -151,3 +151,13 @@ testThat('describe should call the previous beforeEach function before its own',
 
 	assertThat(steps, equals('aaba'));
 });
+
+testThat('testThat should return the name of the test', function() {
+	assertThat(
+		tester.testThat('the name of the test', function() {}).name,
+		equals('the name of the test'));
+
+	assertThat(
+		tester.testThat('the name of the test', function() { fail(); }).name,
+		equals('the name of the test'));
+});
