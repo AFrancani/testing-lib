@@ -1,7 +1,8 @@
 const Assertion = require('./Assertion.js'),
-	LoggingTester = require('./LoggingTester.js');
+	LoggingTester = require('./LoggingTester.js'),
+	TesterCore = require('./TesterCore.js');
 
-const t = new LoggingTester(console),
+const t = new LoggingTester(console, new TesterCore()),
 	testThat = t.testThat,
 	beforeEach = t.beforeEach,
 	describe = t.describe;

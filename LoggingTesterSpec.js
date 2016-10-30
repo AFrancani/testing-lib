@@ -1,8 +1,9 @@
 const Assertion = require('./Assertion.js'),
 	LoggingTester = require('./LoggingTester.js'),
 	FakeLogger =  require('./FakeLogger.js');
+	TesterCore = require('./TesterCore.js');
 
-const t = new LoggingTester(console),
+const t = new LoggingTester(console, new TesterCore()),
 	testThat = t.testThat,
 	beforeEach = t.beforeEach,
 	describe = t.describe;
@@ -19,7 +20,7 @@ var tester, logger;
 
 beforeEach(function() {
 	logger = new FakeLogger();
-	tester = new LoggingTester(logger);
+	tester = new LoggingTester(logger, new TesterCore());
 });
 
 var colors = require('colors');

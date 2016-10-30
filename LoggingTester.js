@@ -1,8 +1,5 @@
-module.exports = function(logger) {
-	var colors = require('colors'),
-	 	TesterCore = require('./TesterCore.js');
-
-	var testerCore = new TesterCore();
+module.exports = function(logger, testerCore) {
+	var colors = require('colors');
 
 	var prefixe = '';
 
