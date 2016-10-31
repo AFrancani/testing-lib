@@ -1,5 +1,6 @@
 module.exports = function() {
 	var beforeEachFunction = function() {};
+	var current_description = { name: '', tests: [] };
 
 	function beforeEach(functionToRun) {
 		var previousBeforeEach = beforeEachFunction;
@@ -10,20 +11,25 @@ module.exports = function() {
 	}
 
 	function testThat(name, functionContainingTest) {
+		var test = { name: name, passed: false };
 		beforeEachFunction();
 		try {
 			functionContainingTest();
-			return { name: name, passed: true };
+			test.passed = true;
 		} catch (e) {
-			return { name: name, passed: false, message: e.message };
+			test.message = e.message;
+		} finally {
+			current_description.tests.push(test);
+			return test;
 		}
 	}
 
 	function describe(name, functionContainingTests) {
+		current_description = { name: name, tests: [] };
 		var previousBeforeEach = beforeEachFunction;
 		functionContainingTests();
 		beforeEachFunction = previousBeforeEach;
-		return { name: name };
+		return current_description;
 	}
 
 	return {

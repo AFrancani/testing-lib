@@ -155,4 +155,14 @@ describe('Tester Core', function() {
 
 		assertThat(description.name, equals('a description'));
 	});
+
+	testThat('describe should return a list of the tests it contains', function() {
+		var description = tester.describe('a description', function() {
+			tester.testThat('a test', function() {});
+			tester.testThat('a second test', function() {});
+			tester.testThat('a third test', function() {});
+		});
+
+		assertThat(description.tests.length, equals(3));
+	});
 });
