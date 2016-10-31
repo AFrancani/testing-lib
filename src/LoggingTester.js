@@ -18,7 +18,7 @@ module.exports = function(logger, testerCore) {
 	function testThat(name, functionContainingTest) {
 		var testResult = testerCore.testThat(name, functionContainingTest);
 
-		log(testResult.name + (testResult.passed ? ' passed!'.green : ' failed!'.red));
+		log((testResult.passed ? 'V'.green : 'X'.red) + ' ' + testResult.name);
 		if(!testResult.passed) {
 			log('  ' + testResult.message);
 		}
@@ -35,10 +35,10 @@ module.exports = function(logger, testerCore) {
 		log(' ');
 
 		var number_of_passing_tests = description.tests.filter(test => test.passed).length;
-		if(number_of_passing_tests) log(`${number_of_passing_tests} tests passed`.green);
+		if (number_of_passing_tests) log(`${number_of_passing_tests} passing`.green);
 
 		var number_of_failing_tests = description.tests.filter(test => !test.passed).length;
-		if(number_of_failing_tests) log(`${number_of_failing_tests} tests failed`.red);
+		if (number_of_failing_tests) log(`${number_of_failing_tests} failing`.red);
 	}
 
 	function describe(name, functionContainingTests) {
@@ -57,4 +57,4 @@ module.exports = function(logger, testerCore) {
 		describe: describe
 	};
 
-}
+};

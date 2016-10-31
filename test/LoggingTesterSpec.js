@@ -16,13 +16,13 @@ describe('Logging tester', function() {
 	testThat('testThat should log when test pass', function() {
 		tester.testThat('some test', function() {});
 
-		assertThat(logger.logged('some test' + ' passed!'.green), isTrue);
+		assertThat(logger.logged('V'.green + ' some test'), isTrue);
 	});
 
 	testThat('testThat should log when test fails', function() {
 		tester.testThat('some test', fail);
 
-		assertThat(logger.logged('some test' + ' failed!'.red), isTrue);
+		assertThat(logger.logged('X'.red + ' some test'), isTrue);
 	});
 
 	testThat('testThat should log when fail assertion fails', function() {
@@ -68,7 +68,7 @@ describe('Logging tester', function() {
 			tester.testThat('some test', function() {});
 		});
 
-		assertThat(logger.logged('  some test' + ' passed!'.green), isTrue);
+		assertThat(logger.logged('  ' + 'V'.green + ' some test'), isTrue);
 	});
 
 	testThat('describe should log the number of passed tests', function() {
@@ -78,7 +78,7 @@ describe('Logging tester', function() {
 			tester.testThat('a third test', function() {});
 		});
 
-		assertThat(logger.logged('  ' + '3 tests passed'.green), isTrue);
+		assertThat(logger.logged('  ' + '3 passing'.green), isTrue);
 	});
 
 	testThat('describe should log the number of failed tests', function() {
@@ -87,6 +87,6 @@ describe('Logging tester', function() {
 			tester.testThat('a second test', fail);
 		});
 
-		assertThat(logger.logged('  ' + '2 tests failed'.red), isTrue);
+		assertThat(logger.logged('  ' + '2 failing'.red), isTrue);
 	});
 });
