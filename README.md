@@ -16,10 +16,10 @@ node LoggingTesterSpec.js
 ## Test your own features
 ```javascript
 const Assertion = require('./Assertion.js'),
-	Tester = require('./Tester.js');
+	TesterFactory = require('./TesterFactory.js');
 
 // create the Tester and expose its methods
-const t = new Tester(console),
+const t = TesterFactory.createLoggingTester(),
 	testThat = t.testThat,
 	beforeEach = t.beforeEach,
 	describe = t.describe;
