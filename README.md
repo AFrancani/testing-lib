@@ -8,26 +8,14 @@ npm install
 
 ## Run the tests
 ```shell
-node TesterSpec.js
+node AssertionSpec.js
+node TesterCoreSpec.js
+node LoggingTesterSpec.js
 ```
 
 ## Test your own features
 ```javascript
-const Assertion = require('./Assertion.js'),
-	Tester = require('./Tester.js');
-
-// create the Tester and expose its methods
-const t = new Tester(console),
-	testThat = t.testThat,
-	beforeEach = t.beforeEach,
-	describe = t.describe;
-
-// expose the Assertion functions
-const fail = Assertion.fail,
-	isTrue = Assertion.isTrue,
-	assertThat = Assertion.assertThat,
-	isFalse = Assertion.isFalse,
-	equals = Assertion.equals;
+require('./testing-lib.js');
 
 // import your code
 const MyAwesomeFeature = require(...);
