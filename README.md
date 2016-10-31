@@ -8,6 +8,7 @@ npm install
 
 ## Run the tests
 ```shell
+cd test
 node AssertionSpec.js
 node TesterCoreSpec.js
 node LoggingTesterSpec.js
