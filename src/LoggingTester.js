@@ -26,15 +26,29 @@ module.exports = function(logger, testerCore) {
 		return testResult.passed;
 	}
 
-	function describe(name, functionContainingTests) {
+	function logHeader(name) {
 		log(' ');
 		log(name.bold);
+	}
+
+	function logResults(description) {
+		log(' ');
+
+		var number_of_passing_tests = description.tests.filter(test => test.passed).length;
+		if(number_of_passing_tests) log(`${number_of_passing_tests} tests passed`.green);
+
+		var number_of_failing_tests = description.tests.filter(test => !test.passed).length;
+		if(number_of_failing_tests) log(`${number_of_failing_tests} tests failed`.red);
+	}
+
+	function describe(name, functionContainingTests) {
+		logHeader(name);
+
 		addPrefixeSize(2);
 
-		testerCore.describe(name, functionContainingTests);
+		logResults(testerCore.describe(name, functionContainingTests));
 
 		addPrefixeSize(-2);
-		log(' ');
 	}
 
 	return {

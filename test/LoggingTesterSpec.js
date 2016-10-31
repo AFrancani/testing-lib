@@ -70,4 +70,23 @@ describe('Logging tester', function() {
 
 		assertThat(logger.logged('  some test' + ' passed!'.green), isTrue);
 	});
+
+	testThat('describe should log the number of passed tests', function() {
+		tester.describe('a feature', function() {
+			tester.testThat('a test', function() {});
+			tester.testThat('a second test', function() {});
+			tester.testThat('a third test', function() {});
+		});
+
+		assertThat(logger.logged('  ' + '3 tests passed'.green), isTrue);
+	});
+
+	testThat('describe should log the number of failed tests', function() {
+		tester.describe('a feature', function() {
+			tester.testThat('a test', fail);
+			tester.testThat('a second test', fail);
+		});
+
+		assertThat(logger.logged('  ' + '2 tests failed'.red), isTrue);
+	});
 });
