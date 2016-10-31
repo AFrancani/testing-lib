@@ -149,4 +149,10 @@ describe('Tester Core', function() {
 			tester.testThat('the name of the test', function() { fail(); }).name,
 			equals('the name of the test'));
 	});
+
+	testThat('describe should return the description', function() {
+		var description = tester.describe('a description', function() {});
+
+		assertThat(description.name, equals('a description'));
+	});
 });

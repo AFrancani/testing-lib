@@ -23,6 +23,7 @@ module.exports = function() {
 		var previousBeforeEach = beforeEachFunction;
 		functionContainingTests();
 		beforeEachFunction = previousBeforeEach;
+		return { name: name };
 	}
 
 	return {
