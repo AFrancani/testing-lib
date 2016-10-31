@@ -1,18 +1,4 @@
-const Assertion = require('./Assertion.js'),
-	TesterFactory = require('./TesterFactory.js');
-
-const t = TesterFactory.createLoggingTester(),
-	testThat = t.testThat,
-	beforeEach = t.beforeEach,
-	describe = t.describe;
-
-const fail = Assertion.fail,
-	FailException = Assertion.FailException,
-	isTrue = Assertion.isTrue,
-	TrueException = Assertion.TrueException,
-	assertThat = Assertion.assertThat,
-	isFalse = Assertion.isFalse,
-	equals = Assertion.equals;
+require('./testing-lib.js');
 
 testThat('fail should fail', function() {
 	try {
@@ -49,7 +35,7 @@ testThat('isFalse should fail if value is true', function() {
 		isFalse(true);
 		fail();
 	} catch (e) {
-		if(!(e instanceof Assertion.FalseException)) {
+		if(!(e instanceof FalseException)) {
 			fail();
 		}
 	}

@@ -1,19 +1,7 @@
-const Assertion = require('./Assertion.js'),
-	FakeLogger =  require('./FakeLogger.js')
+require('./testing-lib.js');
+
+const FakeLogger =  require('./FakeLogger.js')
 	TesterFactory = require('./TesterFactory.js');
-
-const t = TesterFactory.createLoggingTester(),
-	testThat = t.testThat,
-	beforeEach = t.beforeEach,
-	describe = t.describe;
-
-const fail = Assertion.fail,
-	FailException = Assertion.FailException,
-	isTrue = Assertion.isTrue,
-	TrueException = Assertion.TrueException,
-	assertThat = Assertion.assertThat,
-	isFalse = Assertion.isFalse,
-	equals = Assertion.equals;
 
 var tester, logger;
 

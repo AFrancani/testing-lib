@@ -1,19 +1,6 @@
-const Assertion = require('./Assertion.js'),
-	TesterCore = require('./TesterCore.js'),
-	TesterFactory = require('./TesterFactory.js');
+require('./testing-lib.js');
 
-const t = TesterFactory.createLoggingTester(),
-	testThat = t.testThat,
-	beforeEach = t.beforeEach,
-	describe = t.describe;
-
-const fail = Assertion.fail,
-	FailException = Assertion.FailException,
-	isTrue = Assertion.isTrue,
-	TrueException = Assertion.TrueException,
-	assertThat = Assertion.assertThat,
-	isFalse = Assertion.isFalse,
-	equals = Assertion.equals;
+const TesterCore = require('./TesterCore.js');
 
 testThat('testThat should pass if nothing fails', function() {
 	var testPassed = false,

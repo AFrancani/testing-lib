@@ -15,21 +15,7 @@ node LoggingTesterSpec.js
 
 ## Test your own features
 ```javascript
-const Assertion = require('./Assertion.js'),
-	TesterFactory = require('./TesterFactory.js');
-
-// create the Tester and expose its methods
-const t = TesterFactory.createLoggingTester(),
-	testThat = t.testThat,
-	beforeEach = t.beforeEach,
-	describe = t.describe;
-
-// expose the Assertion functions
-const fail = Assertion.fail,
-	isTrue = Assertion.isTrue,
-	assertThat = Assertion.assertThat,
-	isFalse = Assertion.isFalse,
-	equals = Assertion.equals;
+require('./testing-lib.js');
 
 // import your code
 const MyAwesomeFeature = require(...);
