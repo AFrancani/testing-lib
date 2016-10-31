@@ -1,7 +1,7 @@
-require('./testing-lib.js');
+require('../testing-lib.js');
 
 const FakeLogger =  require('./FakeLogger.js')
-	TesterFactory = require('./TesterFactory.js');
+	TesterFactory = require('../src/TesterFactory.js');
 
 var tester, logger;
 

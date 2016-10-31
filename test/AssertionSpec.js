@@ -1,4 +1,4 @@
-require('./testing-lib.js');
+require('../testing-lib.js');
 
 testThat('fail should fail', function() {
 	try {

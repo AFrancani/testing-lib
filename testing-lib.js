@@ -1,5 +1,5 @@
-const Assertion = require('./Assertion.js'),
-	TesterFactory = require('./TesterFactory.js');
+const Assertion = require('./src/Assertion.js'),
+	TesterFactory = require('./src/TesterFactory.js');
 
 const t = TesterFactory.createLoggingTester();
 

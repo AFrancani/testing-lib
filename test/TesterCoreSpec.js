@@ -1,6 +1,6 @@
-require('./testing-lib.js');
+require('../testing-lib.js');
 
-const TesterCore = require('./TesterCore.js');
+const TesterCore = require('../src/TesterCore.js');
 
 testThat('testThat should pass if nothing fails', function() {
 	var testPassed = false,
