@@ -1,8 +1,9 @@
 "use strict";
 
 module.exports = function() {
+	const last = arr => arr.slice(-1)[0];
 	let beforeEachFunction = function() {};
-	let current_description = { name: '', tests: [] };
+	let test_suite = { name: '', tests: [], describe: []}
 
 	function beforeEach(functionToRun) {
 		const previousBeforeEach = beforeEachFunction;
@@ -21,17 +22,24 @@ module.exports = function() {
 		} catch (e) {
 			test.message = e.message;
 		} finally {
-			current_description.tests.push(test);
+			test_suite.tests.push(test);
 			return test;
 		}
 	}
 
 	function describe(name, functionContainingTests) {
-		current_description = { name: name, tests: [] };
 		const previousBeforeEach = beforeEachFunction;
+		const previous_test_suite = test_suite;
+
+		test_suite = { name: name, tests: [], describe: []};
+		previous_test_suite.describe.push(test_suite);
+
 		functionContainingTests();
+
 		beforeEachFunction = previousBeforeEach;
-		return current_description;
+		test_suite = previous_test_suite;
+
+		return last(test_suite.describe);
 	}
 
 	return {

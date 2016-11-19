@@ -33,13 +33,19 @@ module.exports = function(logger, testerCore) {
 		log(name.bold);
 	}
 
+	function toContainingTests(tests, description) {
+		return tests.concat(description.tests, description.describe.reduce(toContainingTests, []));
+	}
+
 	function logResults(description) {
 		log(' ');
 
-		const number_of_passing_tests = description.tests.filter(test => test.passed).length;
+		const every_tests = toContainingTests([], description);
+
+		const number_of_passing_tests = every_tests.filter(test => test.passed).length;
 		if (number_of_passing_tests) log(`${number_of_passing_tests} passing`.green);
 
-		const number_of_failing_tests = description.tests.filter(test => !test.passed).length;
+		const number_of_failing_tests = every_tests.filter(test => !test.passed).length;
 		if (number_of_failing_tests) log(`${number_of_failing_tests} failing`.red);
 	}
 

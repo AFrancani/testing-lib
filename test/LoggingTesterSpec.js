@@ -91,5 +91,21 @@ describe('Logging tester', function() {
 
 			assertThat(logger.logged('  ' + '2 failing'.red), isTrue);
 		});
+
+		testThat('it should add the number of passed and failed tests in inner describes', function() {
+			tester.describe('a feature', function() {
+				tester.describe('a sub feature', function() {
+					tester.testThat('a test', fail);
+					tester.testThat('another test', function() {});
+				});
+				tester.describe('another sub feature', function() {
+					tester.testThat('a test', fail);
+					tester.testThat('another test', function() {});
+				});
+			});
+
+			assertThat(logger.logged('  ' + '2 passing'.green), isTrue);
+			assertThat(logger.logged('  ' + '2 failing'.red  ), isTrue);
+		});
 	});
 });
