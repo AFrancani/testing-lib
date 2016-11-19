@@ -1,12 +1,14 @@
-module.exports = function(logger, testerCore) {
-	var colors = require('colors');
+"use strict";
 
-	var prefixe = '';
+module.exports = function(logger, testerCore) {
+	const colors = require('colors');
+
+	let prefixe = '';
 
 	function addPrefixeSize(value) {
-		var size = prefixe.length + value;
+		const size = prefixe.length + value;
 		prefixe = '';
-		for(var i = 0; i < size; i++) {
+		for(let i = 0; i < size; i++) {
 			prefixe += ' ';
 		}
 	}
@@ -16,7 +18,7 @@ module.exports = function(logger, testerCore) {
 	}
 
 	function testThat(name, functionContainingTest) {
-		var testResult = testerCore.testThat(name, functionContainingTest);
+		const testResult = testerCore.testThat(name, functionContainingTest);
 
 		log((testResult.passed ? 'V'.green : 'X'.red) + ' ' + testResult.name);
 		if(!testResult.passed) {
@@ -34,10 +36,10 @@ module.exports = function(logger, testerCore) {
 	function logResults(description) {
 		log(' ');
 
-		var number_of_passing_tests = description.tests.filter(test => test.passed).length;
+		const number_of_passing_tests = description.tests.filter(test => test.passed).length;
 		if (number_of_passing_tests) log(`${number_of_passing_tests} passing`.green);
 
-		var number_of_failing_tests = description.tests.filter(test => !test.passed).length;
+		const number_of_failing_tests = description.tests.filter(test => !test.passed).length;
 		if (number_of_failing_tests) log(`${number_of_failing_tests} failing`.red);
 	}
 

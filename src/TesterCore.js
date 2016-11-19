@@ -1,9 +1,11 @@
+"use strict";
+
 module.exports = function() {
-	var beforeEachFunction = function() {};
-	var current_description = { name: '', tests: [] };
+	let beforeEachFunction = function() {};
+	let current_description = { name: '', tests: [] };
 
 	function beforeEach(functionToRun) {
-		var previousBeforeEach = beforeEachFunction;
+		const previousBeforeEach = beforeEachFunction;
 		beforeEachFunction = function() {
 			previousBeforeEach();
 			functionToRun();
@@ -11,7 +13,7 @@ module.exports = function() {
 	}
 
 	function testThat(name, functionContainingTest) {
-		var test = { name: name, passed: false };
+		let test = { name: name, passed: false };
 		beforeEachFunction();
 		try {
 			functionContainingTest();
@@ -26,7 +28,7 @@ module.exports = function() {
 
 	function describe(name, functionContainingTests) {
 		current_description = { name: name, tests: [] };
-		var previousBeforeEach = beforeEachFunction;
+		const previousBeforeEach = beforeEachFunction;
 		functionContainingTests();
 		beforeEachFunction = previousBeforeEach;
 		return current_description;
